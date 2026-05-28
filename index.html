@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ameya Gokhale | Executive Coaching</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #14b8a6;
+            --teal-dark: #0d9488;
+            --teal-light: #ccfbf1;
+            --coral: #f97316;
+            --coral-soft: #ffedd5;
+            --slate: #0f172a;
+            --slate-light: #334155;
+            --muted: #64748b;
+            --cream: #f8fafc;
+            --white: #ffffff;
+            --sketch-gray: #475569;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--slate);
+            background-color: var(--cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Sketchy border utility */
+        .sketch-box {
+            border: 2.5px solid var(--slate);
+            border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+            background: var(--white);
+            position: relative;
+        }
+
+        .sketch-box::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+            border: 1px solid var(--slate);
+            opacity: 0.3;
+            pointer-events: none;
+            transform: rotate(0.5deg);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(248, 250, 252, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(20, 184, 166, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Kalam', cursive;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--teal-dark);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--slate-light);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--coral);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--teal-dark);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        /* Hero */
+        .hero {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            min-height: auto;
+        }
+
+        .hero-text h1 {
+            font-family: 'Kalam', cursive;
+            font-size: 3.2rem;
+            line-height: 1.2;
+            color: var(--slate);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero-text h1 .highlight {
+            color: var(--teal-dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-text h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: -4px;
+            right: -4px;
+            height: 12px;
+            background: var(--coral-soft);
+            z-index: -1;
+            border-radius: 4px;
+            transform: rotate(-1deg);
+        }
+
+        .hero-text p {
+            font-size: 1.15rem;
+            color: var(--slate-light);
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--teal);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--teal);
+            box-shadow: 0 4px 14px rgba(20, 184, 166, 0.3);
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .cta-btn:hover {
+            background: transparent;
+            color: var(--teal-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(20, 184, 166, 0.2);
+        }
+
+        .hero-illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: linear-gradient(135deg, var(--teal-light) 0%, var(--cream) 100%);
+            border-radius: 40px;
+            margin: 2rem auto;
+            padding: 4rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--teal);
+            opacity: 0.08;
+            border-radius: 50%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Kalam', cursive;
+            font-size: 2.4rem;
+            color: var(--slate);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header .subtitle {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .problem-text p {
+            font-size: 1.1rem;
+            color: var(--slate-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-text strong {
+            color: var(--teal-dark);
+        }
+
+        /* Solution Section */
+        .solution-section {
+            padding-top: 2rem;
+        }
+
+        .solution-card {
+            background: var(--white);
+            padding: 3rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .solution-card h3 {
+            font-family: 'Kalam', cursive;
+            font-size: 1.8rem;
+            color: var(--slate);
+            margin-bottom: 1rem;
+        }
+
+        .solution-card .big-quote {
+            font-family: 'Kalam', cursive;
+            font-size: 1.5rem;
+            color: var(--teal-dark);
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--coral);
+            line-height: 1.5;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        /* Examples */
+        .examples-section {
+            background: var(--white);
+            border-radius: 40px;
+            margin: 2rem auto;
+            padding: 4rem 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .example-card {
+            padding: 2rem;
+            background: var(--cream);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        .example-card .icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 1rem;
+        }
+
+        .example-card h4 {
+            font-family: 'Kalam', cursive;
+            font-size: 1.3rem;
+            color: var(--slate);
+            margin-bottom: 0.8rem;
+        }
+
+        .example-card p {
+            color: var(--slate-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* About Me Section */
+        .about-section {
+            padding: 4rem 2rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-card {
+            padding: 3rem;
+            background: var(--white);
+        }
+
+        .about-card h2 {
+            font-family: 'Kalam', cursive;
+            font-size: 2.4rem;
+            color: var(--slate);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-card p {
+            font-size: 1.05rem;
+            color: var(--slate-light);
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+        }
+
+        .about-card .passion-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1.5rem;
+        }
+
+        .about-card .passion-tags span {
+            font-family: 'Kalam', cursive;
+            font-size: 0.95rem;
+            color: var(--teal-dark);
+            background: var(--teal-light);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            border: 1.5px solid var(--teal);
+        }
+
+        .about-illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Pricing */
+        .pricing-section {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .pricing-section h2 {
+            font-family: 'Kalam', cursive;
+            font-size: 2.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-section .lead {
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            padding: 2.5rem 3rem;
+            min-width: 280px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card.featured {
+            background: var(--teal);
+            color: var(--white);
+            border-color: var(--teal-dark);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            border-color: var(--teal-dark);
+        }
+
+        .pricing-card.featured .price {
+            color: var(--white);
+        }
+
+        .pricing-card.featured .price-note {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .pricing-card h3 {
+            font-family: 'Kalam', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--teal-dark);
+            margin: 1rem 0;
+        }
+
+        .price-note {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+
+        .pricing-card ul li {
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .pricing-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--coral);
+            font-weight: 700;
+        }
+
+        .pricing-card.featured ul li::before {
+            color: var(--coral-soft);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(180deg, var(--teal-light) 0%, var(--cream) 100%);
+            border-radius: 40px 40px 0 0;
+            margin-top: 3rem;
+            padding: 5rem 2rem;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-header h2 {
+            font-family: 'Kalam', cursive;
+            font-size: 2.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-header p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-container {
+            background-color: var(--white);
+            padding: 30px 30px 20px 30px;
+            max-width: 720px;
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .contact-container h3 {
+            font-family: 'Kalam', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--slate);
+        }
+
+        .contact-container .contact-desc {
+            font-size: 1rem;
+            color: var(--muted);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .form-wrapper {
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .form-wrapper iframe {
+            max-width: 100%;
+            border: none;
+        }
+
+        .email-fallback {
+            margin-top: 20px;
+            font-size: 15px;
+            color: var(--muted);
+        }
+
+        .email-fallback a {
+            color: var(--teal-dark);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid var(--coral);
+            transition: color 0.3s;
+        }
+
+        .email-fallback a:hover {
+            color: var(--coral);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+            background: var(--cream);
+        }
+
+        footer a {
+            color: var(--teal-dark);
+            text-decoration: none;
+        }
+
+        /* SVG Illustrations */
+        .sketch-svg {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+
+        .sketch-stroke {
+            fill: none;
+            stroke: var(--sketch-gray);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .sketch-fill-light {
+            fill: var(--teal-light);
+            stroke: var(--sketch-gray);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .sketch-fill-coral {
+            fill: var(--coral-soft);
+            stroke: var(--sketch-gray);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 7rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.4rem;
+            }
+
+            .hero-text p {
+                max-width: 100%;
+            }
+
+            .hero-illustration {
+                order: -1;
+            }
+
+            .problem-grid,
+            .solution-grid,
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-illustration {
+                order: -1;
+            }
+
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .problem-section,
+            .examples-section {
+                padding: 2.5rem 1.5rem;
+                border-radius: 24px;
+            }
+
+            .solution-card,
+            .about-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-container {
+                padding: 20px 15px 15px 15px;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Ameya Gokhale</a>
+            <ul class="nav-links">
+                <li><a href="#problem">The Problem</a></li>
+                <li><a href="#solution">The Solution</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#examples">Examples</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero / Hook -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Overwhelmed at work? <span class="highlight">Overthinking?</span> Can't sleep at night?</h1>
+            <p>Whether you are struggling to find work-life balance, dealing with difficult coworkers, or just feeling completely weighed down by work issues, you are not alone.</p>
+            <a href="#contact" class="cta-btn">Let's Talk</a>
+        </div>
+        <div class="hero-illustration">
+            <svg class="sketch-svg" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="200" cy="280" rx="140" ry="25" fill="#e2e8f0" stroke="none" opacity="0.5"/>
+                <path class="sketch-stroke" d="M80 240 L320 240 L310 260 L90 260 Z"/>
+                <path class="sketch-stroke" d="M100 260 L100 280 M300 260 L300 280"/>
+                <path class="sketch-fill-light" d="M140 200 L260 200 L270 240 L130 240 Z"/>
+                <path class="sketch-stroke" d="M140 200 L260 200 L270 240 L130 240 Z"/>
+                <path class="sketch-stroke" d="M150 210 L250 210 L255 230 L145 230 Z" fill="#fff"/>
+                <path class="sketch-fill-light" d="M170 240 C170 200, 180 160, 200 160 C220 160, 230 200, 230 240"/>
+                <path class="sketch-stroke" d="M170 240 C170 200, 180 160, 200 160 C220 160, 230 200, 230 240"/>
+                <circle cx="200" cy="130" r="35" class="sketch-fill-light"/>
+                <circle cx="200" cy="130" r="35" class="sketch-stroke"/>
+                <path class="sketch-stroke" d="M165 120 C165 90, 180 85, 200 85 C220 85, 235 90, 235 120" fill="none"/>
+                <path class="sketch-stroke" d="M185 130 Q190 135 195 130"/>
+                <path class="sketch-stroke" d="M205 130 Q210 135 215 130"/>
+                <path class="sketch-stroke" d="M230 160 Q250 140 240 120 Q235 110 225 115"/>
+                <circle cx="280" cy="100" r="15" class="sketch-stroke" fill="none"/>
+                <circle cx="300" cy="80" r="25" class="sketch-stroke" fill="none"/>
+  
